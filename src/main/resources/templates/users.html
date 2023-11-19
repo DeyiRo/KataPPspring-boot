@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> All Users </title>
+</head>
+<body>
+<p>Для управления базой данных пожалуйста используйте команды:</p>
+<p>   /users - получить список users </p>
+<p> /users/new - внести нового user </p>
+<p> /users/edit?id=... - изменить user </p>
+<p> /users/delete?id=... - удалить user </p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Profession</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${usersList}">
+        <h1>
+            <td th:text="${user.getId()}">VALUE/>
+            <td th:text="${user.getName()}">VALUE/>
+            <td th:text="${user.getProfession()}">VALUE</p></td>
+        </h1>
+    </tr>
+    </tbody>
+</table>
+</br>
+</hr>
+<a href="/users/new">Create new User</a>
+
+
+
+</body>
+</html>
