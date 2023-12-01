@@ -13,11 +13,11 @@ import ru.javamentor.springboot.userdao.UserDAO;
 public class UsersController {
 
     @Autowired
-    private UserDAO userDAO;
+    private UserService userService;
 
     @GetMapping()
     public String getUsersList(Model model) {
-        model.addAttribute("usersList", userDAO.getAllUsers());
+        model.addAttribute("usersList", userService.getAllUsers());
         return "users";
     }
 
@@ -29,33 +29,33 @@ public class UsersController {
 
     @PostMapping()
     public String addUser(@ModelAttribute("user") User user) {
-        userDAO.saveUser(user);
+        userService.saveUser(user);
         return "redirect:users";
     }
 
     @GetMapping("/edit")
     public String editUser(Model model, @RequestParam("id") long id) {
-        User user = userDAO.getUserById(id);
+        User user = userService.findUserById(id);
         model.addAttribute("editUser", user);
         return "edit";
     }
 
     @PostMapping("/edit-user")
     public String updateUser(@ModelAttribute("editUser") User editUser) {
-        userDAO.updateUserById(editUser.getId(), editUser);
+        userService.updateUserById(editUser.getId(), editUser);
         return "redirect:/users";
     }
 
     @GetMapping("/delete")
     public String deleteUser(Model model, @RequestParam("id") long id) {
-        User user = userDAO.getUserById(id);
+        User user = userService.getUserById(id);
         model.addAttribute("deleteUser", user);
         return "delete";
     }
 
     @PostMapping("/delete-user")
     public String removeUser(@ModelAttribute("deleteUser") User deleteUser) {
-        userDAO.deleteUserById(deleteUser.getId());
+        userService.deleteUserById(deleteUser.getId());
         return "redirect:/users";
     }
 }
