@@ -1,14 +1,11 @@
 package ru.javamentor.springboot.userdao;
 
 
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-import ru.javamentor.springboot.model.User;
-
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import org.springframework.stereotype.Component;
+import ru.javamentor.springboot.model.User;
+
 import java.util.List;
 
 @Component
@@ -38,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void updateUserById(long id, User user) {
-        User toUpdate = getUserById(id);
+        User toUpdate = findUserById(id);
         toUpdate.setName(user.getName());
         toUpdate.setProfession(user.getProfession());
         entityManagerBean.merge(toUpdate);
@@ -48,7 +45,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void deleteUserById(long id) {
-        entityManagerBean.remove(getUserById(id));
+        entityManagerBean.remove(findUserById(id));
         entityManagerBean.flush();
     }
 

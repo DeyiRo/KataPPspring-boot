@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.javamentor.springboot.model.User;
+import ru.javamentor.springboot.service.UserService;
 import ru.javamentor.springboot.userdao.UserDAO;
 
 
@@ -48,7 +49,7 @@ public class UsersController {
 
     @GetMapping("/delete")
     public String deleteUser(Model model, @RequestParam("id") long id) {
-        User user = userService.getUserById(id);
+        User user = userService.findUserById(id);
         model.addAttribute("deleteUser", user);
         return "delete";
     }

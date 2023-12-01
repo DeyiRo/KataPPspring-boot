@@ -1,10 +1,12 @@
-package web.service;
+package ru.javamentor.springboot.service;
 
-import web.model.User;
+
+
+import ru.javamentor.springboot.model.User;
 
 import java.util.List;
 
-public interface UserServiceI {
+public interface UserService {
 
     void saveUser(User user);
 

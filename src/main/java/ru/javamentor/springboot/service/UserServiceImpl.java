@@ -1,14 +1,15 @@
-package web.service;
+package ru.javamentor.springboot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import web.dao.UserDAO;
-import web.model.User;
+import org.springframework.transaction.annotation.Transactional;
+import ru.javamentor.springboot.model.User;
+import ru.javamentor.springboot.userdao.UserDAO;
 
-import javax.transaction.Transactional;
+
 import java.util.List;
 @Component
-public class UserService implements UserServiceI {
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserDAO userDao;
 
@@ -25,7 +26,7 @@ public class UserService implements UserServiceI {
 
     @Override
     public User findUserById(long id) {
-        return findUserById(id);
+        return userDao.findUserById(id);
     }
 
     @Override
